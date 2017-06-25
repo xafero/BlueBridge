@@ -38,15 +38,29 @@ var multiAddr = process.env.ADDR ? process.env.ADDR : '192.168.178.255';
 var multiPort = process.env.PORT ? process.env.PORT : 4242;
 var dgram = require('dgram');
 var server = dgram.createSocket('udp4');
-server.bind(multiPort, function(){
+server.bind(multiPort, function() 
+{
     server.setBroadcast(true);
     server.setMulticastTTL(128);
 });
 
 log.info('I will post to '+multiAddr+'/'+multiPort+' and log is '+logLvl+'!');
 
+var scanStopping = false;
+
 var onFound = function (peripheral) 
 {
+   if (!scanStopping)
+   {
+      scanStopping = true;
+      log.info('In a few minutes, scan will be stopped...');
+      setTimeout(function ()
+      {
+         scanStopping = false;
+         log.info('Scheduled scan stop!');
+         noble.stopScanning();
+      }, 60 * 1000);
+   }
    var advertise = { 
       ID : peripheral.id,
       Address : peripheral.address,
