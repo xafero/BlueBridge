@@ -16,7 +16,24 @@ var noble = require('noble');
 
 var onState = function (state) 
 {
-   log.info('Bluetooth is now ' + state);
-}
+   log.info('Bluetooth => ' + state);
+   if (state === 'poweredOn') {
+      log.info('Starting scan...');
+      var uuids = [ ];
+      var allowDups = true;
+      noble.startScanning(uuids, allowDups);
+   } else {
+      log.info('Stopping scan...');
+      noble.stopScanning();
+   }
+};
 
 noble.on('stateChange', onState);
+
+var onFound = function (peripheral) 
+{
+   log.info('Found device with local name: ' + peripheral.advertisement.localName);
+   log.info('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
+};
+
+noble.on('discover', onFound);
