@@ -32,8 +32,21 @@ noble.on('stateChange', onState);
 
 var onFound = function (peripheral) 
 {
-   log.info('Found device with local name: ' + peripheral.advertisement.localName);
-   log.info('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
+   var advertise = { 
+      ID : peripheral.id,
+      Address : peripheral.address,
+      AddressType : peripheral.addressType,
+      UUID : peripheral.uuid,
+      Name : peripheral.advertisement.localName,
+      Services : peripheral.advertisement.serviceUuids,
+      Connectable : peripheral.connectable,
+      RSSI : peripheral.rssi,
+      ServiceData : peripheral.advertisement.serviceData.toString('hex'),
+      ManufacturerData : peripheral.advertisement.manufacturerData.toString('hex'),
+      PowerLevel : peripheral.advertisement.txPowerLevel
+   };
+
+   console.log(JSON.stringify(advertise));
 };
 
 noble.on('discover', onFound);
