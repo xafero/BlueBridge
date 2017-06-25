@@ -1,5 +1,5 @@
 #!/bin/sh
-sudo apt-get install -y htop mc vim nano iotop iftop
+sudo apt-get install -y htop mc vim nano iotop iftop tcpdump
 sudo apt-get install -y bluez-tools bluez-firmware bluez-hcidump bluez libbluetooth3-dev libbluetooth3 bluetooth libbluetooth-dev libudev-dev
 wget "https://github.com/winterheart/broadcom-bt-firmware/blob/master/brcm/BCM20702A1-0a5c-21e8.hcd?raw=true"
 sudo mv "BCM20702A1-0a5c-21e8.hcd?raw=true" /lib/firmware/brcm/BCM20702A1-0a5c-21e8.hcd
