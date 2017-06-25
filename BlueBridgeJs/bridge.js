@@ -59,6 +59,8 @@ var onFound = function (peripheral)
          scanStopping = false;
          log.info('Scheduled scan stop!');
          noble.stopScanning();
+         log.info('Exiting...');
+         process.exit(0);
       }, 60 * 1000);
    }
    var advertise = { 
