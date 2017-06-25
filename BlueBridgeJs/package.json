@@ -1,0 +1,13 @@
+{
+    "name": "BlueBridge",
+    "version": "0.1.0",
+    "description": "A bridge connecting Bluetooth and Ethernet",
+    "license": "AGPL-1.0",
+    "scripts": {
+        "start": "node bridge.js"
+    },
+    "main": "bridge.js",
+    "dependencies": {
+        "noble": "^1.8.1"
+    }
+}
