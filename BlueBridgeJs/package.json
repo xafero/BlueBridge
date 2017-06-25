@@ -8,6 +8,8 @@
     },
     "main": "bridge.js",
     "dependencies": {
-        "noble": "^1.8.1"
+        "noble": "^1.8.1",
+        "winston": "^2.3.1",
+        "winston-daily-rotate-file": "^1.4.6"
     }
 }
