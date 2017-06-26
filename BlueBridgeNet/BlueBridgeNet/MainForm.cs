@@ -1,7 +1,6 @@
 ﻿using BlueBridgeNet.API;
 using BlueBridgeNet.Json;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System.Configuration;
 using System.Net.Sockets;
 using System.Text;

@@ -71,6 +71,10 @@
       <Project>{FE949B76-86AC-45E5-A3D4-319CB8C84FDD}</Project>
       <Name>BlueBridgeNet.Json</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueBridgeNet.Linux\BlueBridgeNet.Linux.csproj">
+      <Project>{E7A3E3E5-34F6-412A-A47D-82BFEF032956}</Project>
+      <Name>BlueBridgeNet.Linux</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlueBridgeNet.WinRT\BlueBridgeNet.WinRT.csproj">
       <Project>{EBD97FE5-D8E1-4A6B-8A81-4EB0C6A24191}</Project>
       <Name>BlueBridgeNet.WinRT</Name>

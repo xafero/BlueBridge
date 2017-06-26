@@ -12,7 +12,7 @@ namespace BlueBridgeNet
             if (isApple)
                 typeName = "BlueBridgeNet.Mac.MacBridge, BlueBridgeNet.Mac";
             else if (Environment.OSVersion.Platform == PlatformID.Unix)
-                typeName = "BlueBridgeNet.Linux.LinuxBridgeb, BlueBridgeNet.Linux";
+                typeName = "BlueBridgeNet.Linux.LinuxBridge, BlueBridgeNet.Linux";
             else
                 typeName = "BlueBridgeNet.WinRT.WindowsBridge, BlueBridgeNet.WinRT";
             var hubType = Type.GetType(typeName);
