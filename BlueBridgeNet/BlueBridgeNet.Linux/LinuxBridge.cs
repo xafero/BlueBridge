@@ -51,12 +51,23 @@ namespace BlueBridgeNet.Linux
                                 Mono.Unix.Native.Syscall.recv(sockFd, bytes, (ulong)bytes.Length, 0);
 #endif
                                 log.Debug($"Got {bytes.Length} bytes!");
-                                foreach (var raw in reader.Read(bytes, offset: 16))
+                                OnBlueEvent?.Invoke(this, new BlueEvent
                                 {
-                                    var parsed = (SimpleData)raw;
-                                    parsed.Time = DateTime.UtcNow;
-                                    OnHealthEvent?.Invoke(this, parsed);
-                                }
+                                    TimeStamp = DateTime.UtcNow,
+                                    Advertisement = new Advertisement
+                                    {
+                                        // Address = addr,
+                                        AddressType = AddressType.Random,
+                                        // RSSI = args.RawSignalStrengthInDBm,
+                                        // Connectable = IsConnectable(args.AdvertisementType),
+                                        // Name = args.Advertisement.LocalName,
+                                        // Services = bytes,
+                                        // ID = addr,
+                                        // UUID = addr,
+                                        // ManufacturerData = manu,
+                                        ServiceData = bytes
+                                    }
+                                });
                             }
                         })
             {

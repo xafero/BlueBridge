@@ -50,6 +50,10 @@
       <Project>{F9D71FC3-33FC-427B-BD20-49A33AFB8CE2}</Project>
       <Name>BlueBridgeNet.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BlueBridgeNet.Data.API\BlueBridgeNet.Data.API.csproj">
+      <Project>{2B96B7B4-6AAE-444A-844D-A9D3830D7116}</Project>
+      <Name>BlueBridgeNet.Data.API</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
