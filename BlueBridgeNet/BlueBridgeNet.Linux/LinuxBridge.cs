@@ -43,33 +43,37 @@ namespace BlueBridgeNet.Linux
             status = Bluez.hci_le_set_scan_enable(sockFd, 1, 0, 1000);
             log.Debug($"Bluetooth LE scan enable => {status}");
             watcher = new Thread(() =>
-                        {
+                    {
                         while (shouldRun)
                         {
                             var bytes = new byte[44];
 #if !WINRT
                                 Mono.Unix.Native.Syscall.recv(sockFd, bytes, (ulong)bytes.Length, 0);
 #endif
-                                log.Debug($"Got {bytes.Length} bytes!");
-                                OnBlueEvent?.Invoke(this, new BlueEvent
+                            var manu = new byte[16];
+                            Array.Copy(bytes, manu, manu.Length);
+                            var svcs = new byte[bytes.Length - manu.Length];
+                            Array.Copy(bytes, 16, svcs, 0, svcs.Length);
+                            log.Debug($"Got {bytes.Length} bytes!");
+                            OnBlueEvent?.Invoke(this, new BlueEvent
+                            {
+                                TimeStamp = DateTime.UtcNow,
+                                Advertisement = new Advertisement
                                 {
-                                    TimeStamp = DateTime.UtcNow,
-                                    Advertisement = new Advertisement
-                                    {
-                                        // Address = addr,
-                                        AddressType = AddressType.Random,
-                                        // RSSI = args.RawSignalStrengthInDBm,
-                                        // Connectable = IsConnectable(args.AdvertisementType),
-                                        // Name = args.Advertisement.LocalName,
-                                        // Services = bytes,
-                                        // ID = addr,
-                                        // UUID = addr,
-                                        // ManufacturerData = manu,
-                                        ServiceData = bytes
-                                    }
-                                });
-                            }
-                        })
+                                    // Address = addr,
+                                    AddressType = AddressType.Random,
+                                    // RSSI = args.RawSignalStrengthInDBm,
+                                    // Connectable = IsConnectable(args.AdvertisementType),
+                                    // Name = args.Advertisement.LocalName,
+                                    // Services = bytes,
+                                    // ID = addr,
+                                    // UUID = addr,
+                                    ManufacturerData = manu,
+                                    ServiceData = svcs
+                                }
+                            });
+                        }
+                    })
             {
                 IsBackground = true,
                 Name = "Watcher"
